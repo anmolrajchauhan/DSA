@@ -46,37 +46,35 @@ public class MinScoreInThreeMoves {
 //            1 <= nums.length <= 105
 //            -109 <= nums[i] <= 109
 
-    class Solution {
-        public int minDifference(int[] nums) {
-            int n = nums.length;
-            if(n <= 4){
-                return 0;
-            } else {
-                PriorityQueue<Integer> largestElements = new PriorityQueue<>(4);
-                PriorityQueue<Integer> smallestElements = new PriorityQueue<>(4, Collections.reverseOrder());
-                for(int num : nums){
-                    largestElements.offer(num);
-                    if(largestElements.size() > 4){
-                        largestElements.poll();
-                    }
-                    smallestElements.offer(num);
-                    if(smallestElements.size() > 4){
-                        smallestElements.poll();
-                    }
+    public int minDifference(int[] nums) {
+        int n = nums.length;
+        if(n <= 4){
+            return 0;
+        } else {
+            PriorityQueue<Integer> largestElements = new PriorityQueue<>(4);
+            PriorityQueue<Integer> smallestElements = new PriorityQueue<>(4, Collections.reverseOrder());
+            for(int num : nums){
+                largestElements.offer(num);
+                if(largestElements.size() > 4){
+                    largestElements.poll();
                 }
-
-                List<Integer> minFour = new ArrayList<>(smallestElements);
-                List<Integer> maxFour = new ArrayList<>(largestElements);
-
-                Collections.sort(minFour);
-                Collections.sort(maxFour);
-
-                int score = Integer.MAX_VALUE;
-                for(int i = 0; i < 4; i++){
-                    score = Math.min(score, maxFour.get(i) - minFour.get(i));
+                smallestElements.offer(num);
+                if(smallestElements.size() > 4){
+                    smallestElements.poll();
                 }
-                return score;
             }
+
+            List<Integer> minFour = new ArrayList<>(smallestElements);
+            List<Integer> maxFour = new ArrayList<>(largestElements);
+
+            Collections.sort(minFour);
+            Collections.sort(maxFour);
+
+            int score = Integer.MAX_VALUE;
+            for(int i = 0; i < 4; i++){
+                score = Math.min(score, maxFour.get(i) - minFour.get(i));
+            }
+            return score;
         }
     }
 }

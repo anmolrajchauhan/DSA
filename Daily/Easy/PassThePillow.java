@@ -25,9 +25,7 @@ public class PassThePillow {
 //    2 <= n <= 1000
 //    1 <= time <= 1000
 
-    class Solution {
-        public int passThePillow(int n, int time) {
-            return time/(n - 1) % 2 == 0 ? (time % (n - 1)) + 1 : n - (time % (n - 1));
-        }
+    public int passThePillow(int n, int time) {
+        return time/(n - 1) % 2 == 0 ? (time % (n - 1)) + 1 : n - (time % (n - 1));
     }
 }

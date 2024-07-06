@@ -42,42 +42,40 @@ public class MinAndMaxBetweenCriticalPoints {
 //    The number of nodes in the list is in the range [2, 105].
 //    1 <= Node.val <= 105
 
-    class Solution {
-        public int[] nodesBetweenCriticalPoints(ListNode head) {
+    public int[] nodesBetweenCriticalPoints(ListNode head) {
 
-            int firstCriticalIndex = -1;
-            int lastCriticalIndex = -1;
-            int smallestDistance = Integer.MAX_VALUE;
-            int prevValue = head.getVal();
+        int firstCriticalIndex = -1;
+        int lastCriticalIndex = -1;
+        int smallestDistance = Integer.MAX_VALUE;
+        int prevValue = head.getVal();
 
-            ListNode currentNode = head.getNext();
-            int currentIndex = 1;
+        ListNode currentNode = head.getNext();
+        int currentIndex = 1;
 
-            while (currentNode != null && currentNode.getNext() != null) {
-                if ((prevValue < currentNode.getVal() && currentNode.getVal() > currentNode.getNext().getVal()) ||
-                        (prevValue > currentNode.getVal() && currentNode.getVal() < currentNode.getNext().getVal())) {
+        while (currentNode != null && currentNode.getNext() != null) {
+            if ((prevValue < currentNode.getVal() && currentNode.getVal() > currentNode.getNext().getVal()) ||
+                    (prevValue > currentNode.getVal() && currentNode.getVal() < currentNode.getNext().getVal())) {
 
-                    if (firstCriticalIndex == -1) {
-                        firstCriticalIndex = currentIndex;
-                    } else {
-                        smallestDistance = Math.min(smallestDistance, currentIndex - lastCriticalIndex);
-                    }
-
-                    lastCriticalIndex = currentIndex;
+                if (firstCriticalIndex == -1) {
+                    firstCriticalIndex = currentIndex;
+                } else {
+                    smallestDistance = Math.min(smallestDistance, currentIndex - lastCriticalIndex);
                 }
 
-                prevValue = currentNode.getVal();
-                currentNode = currentNode.getNext();
-                currentIndex++;
+                lastCriticalIndex = currentIndex;
             }
 
-            if (firstCriticalIndex == -1 || lastCriticalIndex == firstCriticalIndex) {
-                return new int[] {-1, -1};
-            }
-
-            return new int[] {smallestDistance, lastCriticalIndex - firstCriticalIndex};
-
+            prevValue = currentNode.getVal();
+            currentNode = currentNode.getNext();
+            currentIndex++;
         }
+
+        if (firstCriticalIndex == -1 || lastCriticalIndex == firstCriticalIndex) {
+            return new int[] {-1, -1};
+        }
+
+        return new int[] {smallestDistance, lastCriticalIndex - firstCriticalIndex};
+
     }
 
 }

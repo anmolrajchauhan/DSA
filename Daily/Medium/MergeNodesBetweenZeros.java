@@ -23,24 +23,22 @@ public class MergeNodesBetweenZeros {
 //    There are no two consecutive nodes with Node.val == 0.
 //    The beginning and end of the linked list have Node.val == 0.
 
-    class Solution {
-        public ListNode mergeNodes(ListNode head) {
+    public ListNode mergeNodes(ListNode head) {
 
-            head = head.getNext();
-            ListNode start = head;
-            while(start != null){
-                ListNode end = start;
-                int sum = 0;
-                while(end.getVal() != 0){
-                    sum += end.getVal();
-                    end = end.getNext();
-                }
-                start.setVal(sum);
-                start.setNext(end.getNext());
-                start = start.getNext();
+        head = head.getNext();
+        ListNode start = head;
+        while(start != null){
+            ListNode end = start;
+            int sum = 0;
+            while(end.getVal() != 0){
+                sum += end.getVal();
+                end = end.getNext();
             }
-            return head;
+            start.setVal(sum);
+            start.setNext(end.getNext());
+            start = start.getNext();
         }
+        return head;
     }
 
 }

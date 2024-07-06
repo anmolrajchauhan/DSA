@@ -1,26 +1,39 @@
+package Medium;
+
 import utils.TreeNode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Stack;
 
-public class Main {
+public class ZigZagLevelOrderTraversal {
 
-    public static void main(String[] args) {
+//    Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).
+//
+//
+//    Example 1:
+//    Input: root = [3,9,20,null,null,15,7]
+//    Output: [[3],[20,9],[15,7]]
+//
+//    Example 2:
+//    Input: root = [1]
+//    Output: [[1]]
+//
+//    Example 3:
+//    Input: root = []
+//    Output: []
+//
+//
+//    Constraints:
+//    The number of nodes in the tree is in the range [0, 2000].
+//    -100 <= Node.val <= 100
 
-        TreeNode root = new TreeNode(3);
-        root.setLeft(new TreeNode(9));
-        root.setRight(new TreeNode(20));
-        root.getRight().setLeft(new TreeNode(15));
-        root.getRight().setRight(new TreeNode(7));
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
 
         List<List<Integer>> result = new ArrayList<>();
-        if(root == null) System.out.println(result);
+        if(root == null) return result;
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
@@ -39,9 +52,8 @@ public class Main {
             result.add(list);
             leftToRight = !leftToRight;
         }
-        System.out.println(result);
 
+        return result;
 
     }
-
 }
